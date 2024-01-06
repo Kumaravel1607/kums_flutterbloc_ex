@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.teal,
-                title: Text("Elite Ecommerce"),
+                title: Text("Elite Ecommerce App"),
                 actions: [
                   IconButton(
                       onPressed: () {
