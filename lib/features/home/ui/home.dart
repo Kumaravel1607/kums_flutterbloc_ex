@@ -34,6 +34,12 @@ class _HomeState extends State<Home> {
         } else if (state is HomeNavigateWishActionState) {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Wish()));
+        } else if (state is HomeProductCartActionState) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Item carted')));
+        } else if (state is HomeProductWishActionState) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Item wished')));
         }
 
         // TODO: implement listener
@@ -55,7 +61,7 @@ class _HomeState extends State<Home> {
                 actions: [
                   IconButton(
                       onPressed: () {
-                        homeBloc.add(HomeProductWishButtonNavigateEvent());
+                        homeBloc.add(HomeWishButtonNavigateEvent());
                       },
                       icon: Icon(Icons.favorite_border_outlined)),
                   IconButton(
@@ -69,7 +75,9 @@ class _HomeState extends State<Home> {
                   itemCount: successState.products.length,
                   itemBuilder: (context, index) {
                     return ProductTile(
-                        productDataModel: successState.products[index]);
+                      homeBloc: homeBloc,
+                      productDataModel: successState.products[index],
+                    );
                   }),
             );
           case HomeErrorState:

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc1/data/cart_item.dart';
 import 'package:bloc1/data/ecommerce.dart';
+import 'package:bloc1/data/wishlist.dart';
 import 'package:bloc1/features/home/models/home_product_model.dart';
 import 'package:meta/meta.dart';
 
@@ -16,7 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeInitialEvent>(homeInitialEvent);
     on<HomeProductCartButtonClickEvent>(homeProductCartButtonClickEvent);
     on<HomeProductWishButtonClickEvent>(homeProductWishButtonClickEvent);
-    on<HomeProductWishButtonNavigateEvent>(homeProductWishButtonNavigateEvent);
+    on<HomeWishButtonNavigateEvent>(homeWishButtonNavigateEvent);
     on<HomeCartWishButtonNavigateEvent>(homeCartWishButtonNavigateEvent);
   }
 
@@ -38,15 +40,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> homeProductCartButtonClickEvent(
       HomeProductCartButtonClickEvent event, Emitter<HomeState> emit) {
     print('Cart Clicked');
+    wishItems.add(event.clickedProduct);
+    emit(HomeProductCartActionState());
   }
 
   FutureOr<void> homeProductWishButtonClickEvent(
       HomeProductWishButtonClickEvent event, Emitter<HomeState> emit) {
     print('Wishlist Clicked');
+    cartItems.add(event.clickedProduct);
+    emit(HomeProductWishActionState());
   }
 
-  FutureOr<void> homeProductWishButtonNavigateEvent(
-      HomeProductWishButtonNavigateEvent event, Emitter<HomeState> emit) {
+  FutureOr<void> homeWishButtonNavigateEvent(
+      HomeWishButtonNavigateEvent event, Emitter<HomeState> emit) {
     print('Wish NAvigate Clicked');
     emit(HomeNavigateWishActionState());
   }

@@ -5,10 +5,20 @@ sealed class HomeEvent {}
 
 class HomeInitialEvent extends HomeEvent {}
 
-class HomeProductWishButtonClickEvent extends HomeEvent {}
+class HomeProductWishButtonClickEvent extends HomeEvent {
+  final ProductDataModel clickedProduct;
+  HomeProductWishButtonClickEvent({
+    required this.clickedProduct,
+  });
+}
 
-class HomeProductCartButtonClickEvent extends HomeEvent {}
+class HomeProductCartButtonClickEvent extends HomeEvent {
+  final ProductDataModel clickedProduct;
+  HomeProductCartButtonClickEvent({
+    required this.clickedProduct,
+  });
+}
 
-class HomeProductWishButtonNavigateEvent extends HomeEvent {}
+class HomeWishButtonNavigateEvent extends HomeEvent {}
 
 class HomeCartWishButtonNavigateEvent extends HomeEvent {}
